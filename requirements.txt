@@ -1,8 +1,7 @@
 streamlit
+llama-cpp-python
 langchain
 langchain-community
-sentence-transformers
 chromadb
-llama-cpp-python
+sentence-transformers
 pypdf
-huggingface_hub
