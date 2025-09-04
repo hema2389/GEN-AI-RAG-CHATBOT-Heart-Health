@@ -7,6 +7,7 @@ from langchain.llms import LlamaCpp
 from langchain.schema.runnable import RunnablePassthrough
 from langchain.schema.output_parser import StrOutputParser
 from langchain.prompts import ChatPromptTemplate
+from huggingface_hub import hf_hub_download
 
 # -------------------------------
 # Load documents
@@ -28,8 +29,13 @@ retriever = vector_store.as_retriever(search_kwargs={'k': 5})
 # -------------------------------
 # LLM
 # -------------------------------
+# Download model from Hugging Face Hub at runtime
+model_path = hf_hub_download(
+    repo_id="mistralai/BioMistral-7B",        # 👈 change to correct repo
+    filename="BioMistral-7B.Q4_K_M.gguf"      # 👈 exact file name in repo
+)
 llm = LlamaCpp(
-    model_path="BioMistral-7B.Q4_K_M.gguf",   # 👈 adjust path if needed
+    model_path=model_path,   # 👈 adjust path if needed
     temperature=0.2,
     max_tokens=2048,
     top_p=1
